@@ -17,7 +17,7 @@ Superuser oluşturmak için aşağıdaki kodu çalıştırın:
 
 > Projeye öğe eklemek için superuser oluşturmalısınız.
 
- Şimdi http://127.0.0.1:8000/ adresine gidip projenin doğu çalışıp çalışmadığını kontrol edebilirsiniz.
+ Şimdi http://127.0.0.1:8080/ adresine gidip projenin doğu çalışıp çalışmadığını kontrol edebilirsiniz.
  
 
 
