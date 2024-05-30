@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+
+
+{% block title %}  İha Kirala {% endblock %}
+
+{% block content %}
+
+
+        <section class="  body-font">
+            <div class="container px-5 py-24 mx-auto">
+                <div class="flex flex-col text-center w-full mb-12">
+                    <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 ">İha Kiralama</h1>
+
+                </div>
+                <form method="get">
+
+                    <div class="flex lg:w-2/3 w-full sm:flex-row flex-col mx-auto px-8 sm:px-0 items-end sm:space-x-4 sm:space-y-0 space-y-4">
+                        <div class="relative sm:mb-0 flex-grow w-full">
+
+                            <label for="brands" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Marka
+                                Seç</label>
+                            {{ form.brand }}
+
+                        </div>
+                        <div class="relative sm:mb-0 flex-grow w-full">
+                            <label for="start_date"
+                                   class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Başlangıç
+                                Tarihi</label>
+                            {{ form.start_date }}
+                        </div>
+                        <div class="relative sm:mb-0 flex-grow w-full">
+                            <label for="end_date" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Bitiş
+                                Tarihi</label>
+                            {{ form.end_date }}
+                        </div>
+                        <button class="text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">
+                            Ara
+                        </button>
+                    </div>
+                </form>
+
+
+                    <div class=" text-center mt-6 space-y-1 text-red-500 list-disc list-inside dark:text-gray-400">
+                       {{ form.errors.end_date }}
+                    </div>
+
+
+            </div>
+        </section>
+
+
+        <section class="body-font overflow-hidden ">
+            <div class="container px-5  mx-auto">
+                {% for drone in drones %}
+                    <div class="-my-8 mt-5 divide-y-2 divide-gray-800 border-2 ">
+                        <div class="py-8 flex flex-wrap md:flex-nowrap">
+                            <div class="md:w-64 md:mb-0 mb-6 mx-3 flex-shrink-0 flex flex-col">
+                                <img src="{{ drone.image.url }}" alt="">
+                            </div>
+                            <div class="md:flex-grow">
+                                <h2 class="text-2xl font-medium  title-font mb-2">{{ drone.name }}</h2>
+                                <p class="leading-relaxed">{{ drone.description }}</p>
+                                <a href="{% url 'drone:rent' drone.slug %}"
+                                   class="block  mt-3 text-white bg-blue-700 hover:bg-blue-800 focus:outline-none w-1/6 focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center   dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Seç
+
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+
+            </div>
+        </section>
+
+{% for i in page_obj.paginator.page_range %}
+    {% if page_obj.number == i %}
+          <li class="page-item active" aria-current="page">
+            <span class="page-link">{{ i }}<span class="sr-only">(current)</span></span>
+          </li>
+          {% elif i > page_obj.number|add:'-5' and i < page_obj.number|add:'5' %} <li class="page-item"><a
+              class="page-link" href="?page={{ i }}{{ query_string }}">{{ i }}</a></li>
+    {% endif %}
+{% endfor %}
+
+
+
+{% endblock %}

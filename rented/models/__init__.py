@@ -1,0 +1,1 @@
+from .Rented import RentedModel
